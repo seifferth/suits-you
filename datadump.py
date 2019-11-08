@@ -39,7 +39,8 @@ if __name__ == "__main__":
 
         for r in repos:
             if r.fork:
-                print("{:<30} (forked from {})".format(
-                    r.name, r.parent.full_name))
+                wait()  # Getting the parent's full name requires a request
+                parent_name = r.parent.full_name
+                print("{:<30} (forked from {})".format(r.name, parent_name))
             else:
                 print(r.name)
