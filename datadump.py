@@ -3,10 +3,21 @@
 import sys
 import github
 import time
+import yaml
+import os
 
 users = ["seifferth"]
 
-g = github.Github()
+if os.path.isfile("config.yaml"):
+    with open("config.yaml") as f:
+        config = yaml.safe_load(f)
+else:
+    config = dict()
+
+if "token" in config.keys():
+    g = github.Github(login_or_token=config["token"])
+else:
+    g = github.Github()
 
 def wait():
     """
@@ -32,4 +43,3 @@ if __name__ == "__main__":
                     r.name, r.parent.full_name))
             else:
                 print(r.name)
-            print() # Final newline
