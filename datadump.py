@@ -11,8 +11,10 @@ users = ["seifferth"]
 if os.path.isfile("config.yaml"):
     with open("config.yaml") as f:
         config = yaml.safe_load(f)
+        limit = 500     # Leave some requests for other programs
 else:
     config = dict()
+    limit = 0
 
 if "token" in config.keys():
     g = github.Github(login_or_token=config["token"])
@@ -23,7 +25,7 @@ def wait():
     """
     Check if rate limit is reached and wait if this is the case.
     """
-    if g.get_rate_limit().core.remaining == 0:
+    if g.get_rate_limit().core.remaining <= limit:
         wait_time = g.rate_limiting_resettime - int(time.time())
         wait_time += 10 # Add 10 sec. just to be sure
         print("Reached rate limit. Waiting for {} mins.".format(
