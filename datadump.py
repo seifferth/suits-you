@@ -11,15 +11,15 @@ users = ["seifferth"]
 if os.path.isfile("config.yaml"):
     with open("config.yaml") as f:
         config = yaml.safe_load(f)
-        limit = 500     # Leave some requests for other programs
 else:
     config = dict()
-    limit = 0
 
 if "token" in config.keys():
     g = github.Github(login_or_token=config["token"])
+    limit = 500     # Leave some requests for other programs
 else:
     g = github.Github()
+    limit = 0
 
 def wait():
     """
