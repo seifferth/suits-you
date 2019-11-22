@@ -136,10 +136,7 @@ def combine_metrics(issues: dict, commits: dict) -> dict:
     return result
 
 def vectorize(metrics: dict):
-    index = dict()
-    index["label"] = 0
-    for i, key in enumerate(get_empty_metric().keys()):
-        index[key] = i+1
+    index = { key: i for i, key in enumerate(get_empty_metric().keys()) }
 
     unindex = dict()
     for key, val in index.items():
@@ -148,23 +145,21 @@ def vectorize(metrics: dict):
 
     # Lable user as 100 %
     user = config["user"]
-    metrics[user]["label"] = 1
     v_user = list()
     for i in range(len(unindex)):
         v_user.append(metrics[user][unindex[i]])
     del metrics[user]
 
     # Lable everyone else as 0 %
-    vectors = list()
+    X = list(); y = list()
     for m in metrics.values():
-        m["label"] = 0
         v = list()
         for i in range(len(unindex)):
             v.append(m[unindex[i]])
-        vectors.append(v)
-        vectors.append(v_user)
+        X.append(v); y.append(0)
+        X.append(v_user); y.append(1)
 
-    return (vectors, index)
+    return (X, y, index)
 
 if __name__ == "__main__":
     for x in config["repos"]:
@@ -189,10 +184,12 @@ if __name__ == "__main__":
         with open(metrics_path+".json", mode="w") as f:
             json.dump(metrics, f, indent=2)
 
-        vectors_path = os.path.join(data_dir, "vectors.json")
+        vectors_path = os.path.join(data_dir, "vectors_{}.json")
         translation_path = os.path.join(data_dir, "translation.json")
-        vectors, translation = vectorize(metrics)
-        with open(vectors_path, mode="w") as f:
-            json.dump(vectors, f)
+        X, y, translation = vectorize(metrics)
+        with open(vectors_path.format("X"), mode="w") as f:
+            json.dump(X, f)
+        with open(vectors_path.format("y"), mode="w") as f:
+            json.dump(y, f)
         with open(translation_path, mode="w") as f:
             json.dump(translation, f, indent=2)
