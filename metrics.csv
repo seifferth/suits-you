@@ -1,0 +1,45 @@
+num_issues,[Issues] Total number of issues opened by this user
+open,[Issues] Total number or issues opened by this user that are open
+closed,[Issues] Total number of issues opened by this user that are closed
+num_comments,[Issues] Total number of comments to all issues opened by this user
+num_labels,[Issues] Total number of labels associated with issues opened by this user
+wordcount,[Issues] Total wordcount of the body text of the first comments of the issues created by this user
+title_wordcount,[Issues] Total wordcount of the titles of issues opened by this user
+body_vocab,[Issues] Number of distinct tokens used by this user in the body of first comments of issues
+body_vocab_filescope,"[Issues] Like body_vocab, but only deduplicating tokens within individual issues"
+title_vocab,"[Issues] Like body_vocab, but for titles"
+title_vocab_filescope,"[Issues] Like body_vocab_filescope, but for titles"
+total_vocab,"[Issues] Like body_vocab, but including text in titles"
+total_vocab_filescope,"[Issues] Like body_vocab_filescope, but including text in titles"
+avg_open,[Issues] open / num_issues
+avg_closed,[Issues] closed / num_issues
+avg_num_comments,[Issues] num_comments / num_issues
+avg_num_labels,[Issues] num_labels / num_issues
+avg_wordcount,[Issues] wordcount / num_issues
+avg_title_wordcount,[Issues] title_wordcount / num_issues
+avg_body_vocab,[Issues] body_vocab_filescope / num_issues
+avg_title_vocab,[Issues] title_vocab_filescope / num_issues
+avg_total_vocab,[Issues] total_vocab_filescope / num_issues
+num_commits,"[Commits] Total number of commits authored by this user (we use authors rather than commiters throughout the commits metrics)"
+loc_additions,[Commits] Total number of lines of code added by this user (no deduplication with deletions)
+loc_deletions,[Commits] Total number of lines of code deleted by this user (no deduplication with additions)
+loc_changes,[Commits] Sum of additions and deletions
+num_files,[Commits] Aggregate count of files modified in each commit
+loc_times_files,"[Commits] Aggregate count of lines of code multiplied by files modified for each commit (somewhat similar to GitPrime's ""Impact"" metric"
+loc_pow_files,"[Commits] Like loc_times_files, but calculating loc to the power of files affected, rather than simply multiplying"
+msg_wordcount,[Commits] Total wordcount for commit messages associated to this author's commits
+msg_vocab,[Commits] Number of distinct tokens used by this user in commit messages
+msg_vocab_filescope,"[Commits] Like msg_vocab, but only deduplicating tokens within individual issues"
+patch_wordcount,"[Commits] Like msg_wordcount, but for source code contained in patches rather than for commit messages"
+patch_vocab,"[Commits] Like msg_vocab, but for source code contained in patches rather than for commit messages"
+patch_vocab_filescope,"[Commits] Like msg_vocab_filescope, but for source code contained in patches, rather than for commit messages"
+avg_loc_additions,[Commits] loc_additions / num_commits
+avg_loc_deletions,[Commits] loc_deletions / num_commits
+avg_loc_changes,[Commits] loc_changes / num_commits
+avg_num_files,[Commits] num_files / num_commits
+avg_loc_times_files,[Commits] loc_times_files / num_commits
+avg_loc_pow_files,[Commits] loc_pow_files / num_commits
+avg_msg_wordcount,[Commits] msg_wordcount / num_commits
+avg_msg_vocab,[Commits] msg_vocab_filescope / num_commits
+avg_patch_wordcount,[Commits] patch_wordcount / num_commits
+avg_patch_vocab,[Commits] patch_vocab_filescope / num_commits
