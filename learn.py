@@ -5,7 +5,7 @@ import yaml
 import os
 import json
 import random
-from sklearn.linear_model import Perceptron
+from sklearn.linear_model import Lasso
 
 with open("config.yaml") as f:
     config = yaml.safe_load(f)
@@ -47,10 +47,11 @@ if __name__ == "__main__":
         dataset.add_vectors(X, y)
     dataset.balance()
 
-    learner = Perceptron(max_iter=100)
+    learner = Lasso(positive=True)
     learner.fit(dataset.X, dataset.y)
+
     score = learner.score(dataset.X, dataset.y)
-    w = learner.coef_[0]
+    w = learner.coef_
     print("Picking up user with an accuracy of {}".format(score),
         file=sys.stderr)
 

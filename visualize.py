@@ -17,12 +17,6 @@ else:
 def get_weights():
     with open(os.path.join("data", "weights.json")) as f:
         w = json.load(f)
-    for key, val in w.items():
-        if val <= 0:
-            w[key] = 0
-        else:
-            w[key] = val
-    print("\n".join([key for key, val in w.items() if val != 0]))
     return w
 
 def save_graphs(repo, weights):
@@ -38,8 +32,7 @@ def save_graphs(repo, weights):
         score = 0
         for key, val in metrics[u].items():
             score += weights[key] * val
-        #data["score"].append(score)
-        data["score"].append(math.log(score))
+        data["score"].append(score)
 
     sorting = list()
     for i in range(len(data["user"])):
