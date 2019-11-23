@@ -19,6 +19,13 @@ def get_weights():
         w = json.load(f)
     return w
 
+def combine_weights(weights):
+    formula = list()
+    for key, val in weights.items():
+        if val != 0:
+            formula.append("{} * {}".format(val, key))
+    return " + ".join(formula)
+
 def save_graphs(repo, weights):
     repo_dirname = repo.replace("/", "_")
     metrics_path = os.path.join("data", repo_dirname, "metrics.json")
@@ -52,3 +59,5 @@ if __name__ == "__main__":
     os.makedirs("graphs", exist_ok=True)
     for repo in config["repos"]:
         save_graphs(repo, weights)
+    with open(os.path.join("graphs", "formula.txt"), mode="w") as f:
+        f.write(combine_weights(weights)+"\n")
