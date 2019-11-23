@@ -15,6 +15,8 @@ class CombinedDataset():
         self.datasets = list()
         self.X = list()
         self.y = list()
+        self.unique_X = list()
+        self.unique_y = list()
     def add_vectors(self, X, y):
         self.datasets.append((X, y))
     def balance(self):
@@ -28,6 +30,14 @@ class CombinedDataset():
                 i = random.randint(0, len(X)-1)
                 self.X.append(X[i])
                 self.y.append(y[i])
+    def make_unique(self):
+        self.unique_X = list()
+        self.unique_y = list()
+        for X, y in self.datasets:
+            for i in range(len(X)):
+                if X[i] not in self.unique_X or y[i] not in self.unique_y:
+                    self.unique_X.append(X[i])
+                    self.unique_y.append(y[i])
 
 def get_vectors(repo: str):
     repo_dir = os.path.join("data", repo.replace("/", "_"))
@@ -50,7 +60,8 @@ if __name__ == "__main__":
     learner = Lasso(positive=True)
     learner.fit(dataset.X, dataset.y)
 
-    score = learner.score(dataset.X, dataset.y)
+    dataset.make_unique()
+    score = learner.score(dataset.unique_X, dataset.unique_y)
     w = learner.coef_
     print("Picking up user with an accuracy of {}".format(score),
         file=sys.stderr)
