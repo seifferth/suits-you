@@ -19,6 +19,12 @@ class CombinedDataset():
         self.unique_y = list()
     def add_vectors(self, X, y):
         self.datasets.append((X, y))
+    def combine(self):
+        self.X = list()
+        self.y = list()
+        for X, y in self.datasets:
+            self.X.extend(X)
+            self.y.extend(y)
     def balance(self):
         common_length = max(map(len, [ X for X, y in self.datasets ]))
         self.X = list()
@@ -55,6 +61,7 @@ if __name__ == "__main__":
     for repo in config["repos"]:
         X, y = get_vectors(repo)
         dataset.add_vectors(X, y)
+    dataset.combine()
     dataset.balance()
 
     learner = Lasso(positive=True)
