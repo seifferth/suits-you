@@ -18,7 +18,7 @@ if "token" in config.keys():
     limit = 500     # Leave some requests for other programs
 else:
     g = github.Github()
-    limit = 0
+    limit = 10
 
 def wait(verbose=False):
     """
