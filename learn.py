@@ -62,7 +62,8 @@ if __name__ == "__main__":
         X, y = get_vectors(repo)
         dataset.add_vectors(X, y)
     dataset.combine()
-    dataset.balance()
+    if config.get("balance", True):
+        dataset.balance()
 
     learner = Lasso(positive=True)
     learner.fit(dataset.X, dataset.y)
