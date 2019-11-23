@@ -99,47 +99,104 @@ def combine_metrics(issues: dict, commits: dict) -> dict:
 
         # Calculate averages for issues:
         if data["num_issues"] != 0:
-            data["avg_open"] = \
-                    data["open"] / data["num_issues"]
-            data["avg_closed"] = \
-                    data["closed"] / data["num_issues"]
-            data["avg_num_comments"] = \
-                    data["num_comments"] / data["num_issues"]
-            data["avg_num_labels"] = \
-                    data["num_labels"] / data["num_issues"]
-            data["avg_wordcount"] = \
-                    data["wordcount"] / data["num_issues"]
-            data["avg_title_wordcount"] = \
-                    data["title_wordcount"] / data["num_issues"]
-            data["avg_body_vocab"] = \
-                    data["body_vocab_filescope"] / data["num_issues"]
-            data["avg_title_vocab"] = \
-                    data["title_vocab_filescope"] / data["num_issues"]
-            data["avg_total_vocab"] = \
-                    data["total_vocab_filescope"] / data["num_issues"]
+            try:
+                data["avg_open"] = \
+                     data["open"] / data["num_issues"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_closed"] = \
+                     data["closed"] / data["num_issues"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_num_comments"] = \
+                     data["num_comments"] / data["num_issues"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_num_labels"] = \
+                     data["num_labels"] / data["num_issues"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_wordcount"] = \
+                     data["wordcount"] / data["num_issues"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_title_wordcount"] = \
+                     data["title_wordcount"] / data["num_issues"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_body_vocab"] = \
+                     data["body_vocab_filescope"] / data["num_issues"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_title_vocab"] = \
+                     data["title_vocab_filescope"] / data["num_issues"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_total_vocab"] = \
+                        data["total_vocab_filescope"] / data["num_issues"]
+            except OverflowError:
+                pass
 
         # Calculate averages for commits:
         if data["num_commits"] != 0:
-            data["avg_loc_additions"] = \
-                    data["loc_additions"] / data["num_commits"]
-            data["avg_loc_deletions"] = \
-                    data["loc_deletions"] / data["num_commits"]
-            data["avg_loc_changes"] = \
-                    data["loc_changes"] / data["num_commits"]
-            data["avg_num_files"] = \
-                    data["num_files"] / data["num_commits"]
-            data["avg_loc_times_files"] = \
-                    data["loc_times_files"] / data["num_commits"]
-            data["avg_loc_pow_files"] = \
-                    data["loc_pow_files"] / data["num_commits"]
-            data["avg_msg_wordcount"] = \
-                    data["msg_wordcount"] / data["num_commits"]
-            data["avg_msg_vocab"] = \
-                    data["msg_vocab_filescope"] / data["num_commits"]
-            data["avg_patch_wordcount"] = \
-                    data["patch_wordcount"] / data["num_commits"]
-            data["avg_patch_vocab"] = \
-                    data["patch_vocab_filescope"] / data["num_commits"]
+            try:
+                data["avg_loc_additions"] = \
+                        data["loc_additions"] / data["num_commits"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_loc_deletions"] = \
+                        data["loc_deletions"] / data["num_commits"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_loc_changes"] = \
+                        data["loc_changes"] / data["num_commits"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_num_files"] = \
+                        data["num_files"] / data["num_commits"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_loc_times_files"] = \
+                        data["loc_times_files"] / data["num_commits"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_loc_pow_files"] = \
+                        data["loc_pow_files"] / data["num_commits"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_msg_wordcount"] = \
+                        data["msg_wordcount"] / data["num_commits"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_msg_vocab"] = \
+                        data["msg_vocab_filescope"] / data["num_commits"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_patch_wordcount"] = \
+                        data["patch_wordcount"] / data["num_commits"]
+            except OverflowError:
+                pass
+            try:
+                data["avg_patch_vocab"] = \
+                        data["patch_vocab_filescope"] / data["num_commits"]
+            except OverflowError:
+                pass
 
     return result
 
