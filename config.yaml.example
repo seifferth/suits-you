@@ -1,0 +1,7 @@
+token: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+user: seifferth
+repos:
+  - brrd/Abricotine
+  - joeynmt/joeynmt
+  - schulzch/edit-distance-js
+balance: False
