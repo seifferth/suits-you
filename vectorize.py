@@ -74,6 +74,14 @@ def get_empty_metric() -> dict:
                     "avg_patch_vocab": 0,
                }
 
+###################################################
+##  Create translation dicst from empty metrics  ##
+###################################################
+index = { key: i for i, key in enumerate(get_empty_metric().keys()) }
+unindex = dict()
+for key, val in index.items():
+    unindex[val] = key
+
 def combine_metrics(issues: dict, commits: dict) -> dict:
     result = dict()
     usernames = set(issues.keys()).union(set(commits.keys()))
@@ -136,21 +144,14 @@ def combine_metrics(issues: dict, commits: dict) -> dict:
     return result
 
 def vectorize(metrics: dict):
-    index = { key: i for i, key in enumerate(get_empty_metric().keys()) }
-
-    unindex = dict()
-    for key, val in index.items():
-        unindex[val] = key
-    vector_length = len(index)
-
-    # Lable user as 100 %
+    # Label user as 100 %
     user = config["user"]
     v_user = list()
     for i in range(len(unindex)):
         v_user.append(metrics[user][unindex[i]])
     del metrics[user]
 
-    # Lable everyone else as 0 %
+    # Label everyone else as 0 %
     X = list(); y = list()
     for m in metrics.values():
         v = list()
@@ -159,7 +160,7 @@ def vectorize(metrics: dict):
         X.append(v); y.append(0)
         X.append(v_user); y.append(1)
 
-    return (X, y, index)
+    return (X, y)
 
 if __name__ == "__main__":
     for x in config["repos"]:
@@ -185,11 +186,12 @@ if __name__ == "__main__":
             json.dump(metrics, f, indent=2)
 
         vectors_path = os.path.join(data_dir, "vectors_{}.json")
-        translation_path = os.path.join(data_dir, "translation.json")
-        X, y, translation = vectorize(metrics)
+        X, y = vectorize(metrics)
         with open(vectors_path.format("X"), mode="w") as f:
             json.dump(X, f)
         with open(vectors_path.format("y"), mode="w") as f:
             json.dump(y, f)
-        with open(translation_path, mode="w") as f:
-            json.dump(translation, f, indent=2)
+
+    translation_path = os.path.join("data", "translation.json")
+    with open(translation_path, mode="w") as f:
+        json.dump(index, f, indent=2)
