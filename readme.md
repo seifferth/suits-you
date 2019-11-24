@@ -119,9 +119,9 @@ values. The configurable options are the following:
   is omitted. Specifying a token greatly increases the number of API
   requests GitHub will accept per hour, however, and is therefore
   recommended.
-- **user**: The GitHub username of the developer that is supposed to
-  look good in the resulting diagrams. This user doesn't have to be the
-  same as the one who created the token.
+- **user**: The GitHub username of the developer who is supposed to look
+  good in the resulting diagrams. This user doesn't have to be the same
+  as the one who created the token.
 - **repos**: A list of upstream repositories the specified user has
   contributed to. Data from all these repositories will be combined for
   fitting the custom metric with `learn.py` and individual graphs for each
