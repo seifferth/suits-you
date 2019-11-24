@@ -1,4 +1,4 @@
-# Example Graphs Generated With Suits-You
+# Example graphs created with Suits You
 
 ## Custom Contribution Score Metric
 
